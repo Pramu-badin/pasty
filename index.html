@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Pasty Bunny 🐰 - Fresh & Sweet Pastries Every Day!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pastel-pink: #FFB6C1;
+            --pastel-pink-light: #FFE4E9;
+            --cream: #FFF8DC;
+            --chocolate: #5D4037;
+            --chocolate-light: #8D6E63;
+            --white: #FFFFFF;
+            --shadow: rgba(93, 64, 55, 0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--cream);
+            color: var(--chocolate);
+            overflow-x: hidden;
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--pastel-pink-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-bunny {
+            font-size: 4rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: var(--chocolate);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--chocolate);
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--pastel-pink);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.3rem;
+            padding: 0.5rem;
+            background: var(--pastel-pink-light);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            background: var(--pastel-pink);
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--chocolate);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--pastel-pink-light) 0%, var(--cream) 100%);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🐰';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.05;
+            top: -50px;
+            right: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            color: var(--chocolate);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--chocolate-light);
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--pastel-pink);
+            color: var(--chocolate);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.4);
+            transition: var(--transition);
+            animation: slideInLeft 1s ease-out 0.4s both;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 182, 193, 0.6);
+            background: #FF9AAE;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px var(--shadow);
+            transform: rotate(2deg);
+            transition: var(--transition);
+        }
+
+        .hero-img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Ad Banner Section */
+        .ad-section {
+            background: var(--chocolate);
+            color: white;
+            padding: 1rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ad-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ad-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Menu Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8rem;
+            color: var(--chocolate);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '🧁';
+            display: block;
+            font-size: 2rem;
+            margin-top: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pastry-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pastry-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(93, 64, 55, 0.2);
+        }
+
+        .pastry-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .pastry-card:hover .pastry-image {
+            transform: scale(1.1);
+        }
+
+        .pastry-content {
+            padding: 1.5rem;
+        }
+
+        .pastry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+
+        .pastry-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--chocolate);
+        }
+
+        .pastry-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--pastel-pink);
+            background: var(--chocolate);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .rating {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--pastel-pink);
+            border: none;
+            border-radius: 12px;
+            color: var(--chocolate);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background: var(--chocolate);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        /* Offers Section */
+        .offers-section {
+            background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-pink-light) 100%);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offers-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,182,193,0.3) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .offer-card:hover {
+            transform: scale(1.05);
+        }
+
+        .offer-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .offer-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+        }
+
+        .offer-desc {
+            color: var(--chocolate-light);
+            font-size: 1rem;
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px var(--shadow);
+        }
+
+        .about-text h3 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: var(--chocolate);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--chocolate-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            background: var(--pastel-pink);
+            color: var(--chocolate);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(to bottom, var(--cream), white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--chocolate);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--pastel-pink-light);
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--pastel-pink);
+            box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.2);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: var(--transition);
+        }
+
+        .info-item:hover {
+            transform: translateX(10px);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--pastel-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--chocolate);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--pastel-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--chocolate);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--chocolate);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px var(--shadow);
+            z-index: 2000;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            background: var(--pastel-pink);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: var(--chocolate);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--chocolate);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--cream);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            color: var(--chocolate);
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: var(--pastel-pink);
+            font-weight: 800;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--chocolate);
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--pastel-pink);
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            background: var(--cream);
+            border-top: 2px solid var(--pastel-pink-light);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--chocolate);
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--chocolate);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: var(--pastel-pink);
+            color: var(--chocolate);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: var(--chocolate-light);
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Payment Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .payment-modal {
+            background: white;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: var(--chocolate);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .payment-method {
+            padding: 1rem;
+            border: 2px solid var(--pastel-pink-light);
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            flex: 1;
+        }
+
+        .payment-method:hover,
+        .payment-method.active {
+            border-color: var(--pastel-pink);
+            background: var(--pastel-pink-light);
+        }
+
+        .payment-method i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .payment-form .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .card-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--pastel-pink) 0%, #FF9AAE 100%);
+            border: none;
+            border-radius: 15px;
+            color: var(--chocolate);
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.4);
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 182, 193, 0.6);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-message i {
+            font-size: 5rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-message h3 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--chocolate);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 4000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--pastel-pink);
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--chocolate);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--pastel-pink);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-container,
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .payment-methods {
+                flex-direction: column;
+            }
+
+            .card-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            --cream: #2C1810;
+            --chocolate: #FFE4E9;
+            --chocolate-light: #FFB6C1;
+            --white: #3E2723;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(62, 39, 35, 0.95);
+        }
+
+        body.dark-mode .pastry-card,
+        body.dark-mode .offer-card,
+        body.dark-mode .contact-form,
+        body.dark-mode .info-item {
+            background: #4E342E;
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #3E2723 0%, #2C1810 100%);
+        }
+
+        body.dark-mode .offers-section {
+            background: linear-gradient(135deg, #4E342E 0%, #3E2723 100%);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--chocolate);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(20deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader" id="loader">
+        <div class="loader-bunny">🐰</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>🐰</span>
+                <span>Hot Pasty Bunny</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#offers">Offers</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <div class="cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Fresh & Sweet Pastries Every Day!</h1>
+                <p>Indulge in our handcrafted delights made with love and the finest ingredients. From fluffy croissants to decadent cakes, every bite is a hug for your taste buds! 🧁</p>
+                <a href="#menu" class="btn-primary">Order Now 🍰</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&h=400&fit=crop" alt="Delicious Pastries" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Banner -->
+    <div class="ad-section">
+        <div class="ad-track">
+            <div class="ad-item">🎂 50% OFF Cakes Today Only!</div>
+            <div class="ad-item">🧁 Buy 1 Get 1 Free on Cupcakes!</div>
+            <div class="ad-item">🍩 Weekend Special: Free Donut with Coffee!</div>
+            <div class="ad-item">🥐 Fresh Croissants Every Morning at 7AM!</div>
+            <div class="ad-item">🎂 50% OFF Cakes Today Only!</div>
+            <div class="ad-item">🧁 Buy 1 Get 1 Free on Cupcakes!</div>
+            <div class="ad-item">🍩 Weekend Special: Free Donut with Coffee!</div>
+            <div class="ad-item">🥐 Fresh Croissants Every Morning at 7AM!</div>
+        </div>
+    </div>
+
+    <!-- Menu Section -->
+    <section class="section" id="menu">
+        <h2 class="section-title">Our Delicious Menu</h2>
+        <div class="menu-grid" id="menuGrid">
+            <!-- Menu items will be injected by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Offers Section -->
+    <section class="offers-section" id="offers">
+        <div class="offers-container">
+            <h2 class="section-title" style="color: white;">Special Offers</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <span class="offer-icon">🎁</span>
+                    <h3 class="offer-title">Buy 1 Get 1 Free</h3>
+                    <p class="offer-desc">On all cupcakes every Tuesday! Double the sweetness, double the joy!</p>
+                </div>
+                <div class="offer-card">
+                    <span class="offer-icon">🎉</span>
+                    <h3 class="offer-title">Weekend Discounts</h3>
+                    <p class="offer-desc">Get 25% off on orders above $50. Perfect for parties and gatherings!</p>
+                </div>
+                <div class="offer-card">
+                    <span class="offer-icon">🎂</span>
+                    <h3 class="offer-title">Birthday Special</h3>
+                    <p class="offer-desc">Free candle set and greeting card with every birthday cake order!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="about-content">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=600&h=400&fit=crop" alt="Our Bakery" class="about-img">
+            </div>
+            <div class="about-text">
+                <h3>Our Sweet Story</h3>
+                <p>Hot Pasty Bunny started as a small home kitchen dream in 2020. What began as baking treats for neighbors quickly grew into a beloved local bakery, all thanks to our commitment to quality and that extra dash of love in every recipe.</p>
+                <p>Named after our mascot bunny who always seemed to appear when fresh pastries were cooling, we've kept that same warmth and whimsy in everything we do.</p>
+                <h4 style="margin: 1.5rem 0 1rem; color: var(--chocolate);">Why Choose Us?</h4>
+                <ul class="features-list">
+                    <li>Fresh baked daily with premium ingredients</li>
+                    <li>Handcrafted with love and care</li>
+                    <li>Custom orders for special occasions</li>
+                    <li>Eco-friendly packaging</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+            <form class="contact-form" onsubmit="handleContactSubmit(event)">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Your Message</label>
+                    <textarea rows="5" required placeholder="Tell us about your sweet cravings..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Send Message 💌</button>
+            </form>
+            <div class="contact-info">
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <h4>Visit Us</h4>
+                        <p>123 Bunny Lane, Sweet Town, ST 12345</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <h4>Call Us</h4>
+                        <p>+94 704488253</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div>
+                        <h4>Email Us</h4>
+                        <p>harithmadura@gmail.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🕐</div>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>Mon-Sat: 7AM - 10PM | Sun: 8AM - 9PM</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">🐰 Hot Pasty Bunny</div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#offers">Offers</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p style="margin-bottom: 1rem;">Made with 🧁 and 💕</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Hot Pasty Bunny. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart 🛒</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Your cart is empty!</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Add some sweet treats! 🧁</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="openPaymentModal()">
+                Proceed to Checkout 💳
+            </button>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="payment-modal">
+            <div class="modal-header">
+                <h2>Payment 💳</h2>
+                <p style="color: var(--chocolate-light);">Complete your order securely</p>
+            </div>
+            
+            <div id="paymentForm">
+                <div class="payment-methods">
+                    <div class="payment-method active" onclick="selectPaymentMethod(this, 'card')">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Card</span>
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod(this, 'cod')">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Cash</span>
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod(this, 'mobile')">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Mobile</span>
+                    </div>
+                </div>
+
+                <form class="payment-form" onsubmit="processPayment(event)">
+                    <div class="form-group">
+                        <label>Cardholder Name</label>
+                        <input type="text" id="cardName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+                    <div class="card-row">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="pay-btn">
+                        Pay <span id="payAmount">$0.00</span> 🎉
+                    </button>
+                </form>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Payment Successful!</h3>
+                <p>Thank you for your order! 🎂</p>
+                <p style="margin-top: 1rem; color: var(--chocolate-light);">Your sweet treats will be ready soon!</p>
+                <button class="btn-primary" style="margin-top: 1.5rem;" onclick="closePaymentModal()">
+                    Continue Shopping 🛍️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Item added to cart!</span>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <script>
+        // Menu Data
+        const menuItems = [
+            {
+                id: 1,
+                name: "Strawberry Dream Cake",
+                price: 35.00,
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop",
+                category: "cake"
+            },
+            {
+                id: 2,
+                name: "Vanilla Bean Cupcake",
+                price: 4.50,
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=400&h=300&fit=crop",
+                category: "cupcake"
+            },
+            {
+                id: 3,
+                name: "Glazed Donut",
+                price: 3.50,
+                rating: 4,
+                image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop",
+                category: "donut"
+            },
+            {
+                id: 4,
+                name: "Butter Croissant",
+                price: 5.00,
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop",
+                category: "puff"
+            },
+            {
+                id: 5,
+                name: "Chocolate Lava Cake",
+                price: 42.00,
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=300&fit=crop",
+                category: "cake"
+            },
+            {
+                id: 6,
+                name: "Red Velvet Cupcake",
+                price: 5.00,
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1614707267537-b85aaf00c31b?w=400&h=300&fit=crop",
+                category: "cupcake"
+            },
+            {
+                id: 7,
+                name: "Sprinkle Donut",
+                price: 4.00,
+                rating: 4,
+                image: "https://images.unsplash.com/photo-1527904324834-3bda86da6771?w=400&h=300&fit=crop",
+                category: "donut"
+            },
+            {
+                id: 8,
+                name: "Almond Puff Pastry",
+                price: 6.50,
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop",
+                category: "puff"
+            }
+        ];
+
+        // Cart State
+        let cart = JSON.parse(localStorage.getItem('hotPastyBunnyCart')) || [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+            
+            renderMenu();
+            updateCartUI();
+            setupCardFormatting();
+        });
+
+        // Render Menu
+        function renderMenu() {
+            const menuGrid = document.getElementById('menuGrid');
+            menuGrid.innerHTML = menuItems.map(item => `
+                <div class="pastry-card">
+                    <img src="${item.image}" alt="${item.name}" class="pastry-image">
+                    <div class="pastry-content">
+                        <div class="pastry-header">
+                            <h3 class="pastry-name">${item.name}</h3>
+                            <span class="pastry-price">$${item.price.toFixed(2)}</span>
+                        </div>
+                        <div class="rating">
+                            ${'⭐'.repeat(item.rating)}${'☆'.repeat(5 - item.rating)}
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(${item.id})">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart Functions
+        function addToCart(itemId) {
+            const item = menuItems.find(i => i.id === itemId);
+            const existingItem = cart.find(i => i.id === itemId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+            
+            saveCart();
+            updateCartUI();
+            showToast(`${item.name} added to cart! 🧁`);
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            saveCart();
+            updateCartUI();
+        }
+
+        function updateQuantity(itemId, change) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemId);
+                } else {
+                    saveCart();
+                    updateCartUI();
+                }
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('hotPastyBunnyCart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartFooter = document.getElementById('cartFooter');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>Your cart is empty!</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Add some sweet treats! 🧁</p>
+                    </div>
+                `;
+                cartFooter.style.display = 'none';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span style="font-weight: 700; min-width: 30px; text-align: center;">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+                cartFooter.style.display = 'block';
+                cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+            }
+        }
+
+        // UI Functions
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Payment Functions
+        function openPaymentModal() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('payAmount').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('paymentModal').classList.add('active');
+            toggleCart();
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            document.getElementById('paymentForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            // Clear cart after successful payment
+            cart = [];
+            saveCart();
+            updateCartUI();
+        }
+
+        function selectPaymentMethod(element, method) {
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            
+            // Show/hide card fields based on method
+            const cardFields = document.querySelectorAll('.payment-form .form-group, .card-row');
+            if (method === 'cod') {
+                cardFields.forEach(field => field.style.display = 'none');
+            } else {
+                cardFields.forEach(field => field.style.display = method === 'mobile' ? 'none' : 'block');
+            }
+        }
+
+        function processPayment(event) {
+            event.preventDefault();
+            
+            // Simulate processing
+            const payBtn = document.querySelector('.pay-btn');
+            const originalText = payBtn.innerHTML;
+            payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            payBtn.disabled = true;
+            
+            setTimeout(() => {
+                document.getElementById('paymentForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                payBtn.innerHTML = originalText;
+                payBtn.disabled = false;
+            }, 2000);
+        }
+
+        function setupCardFormatting() {
+            const cardNumber = document.getElementById('cardNumber');
+            const expiryDate = document.getElementById('expiryDate');
+            
+            cardNumber.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s/g, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                e.target.value = formattedValue;
+            });
+            
+            expiryDate.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        }
+
+        // Contact Form
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            showToast('Message sent successfully! We\'ll get back to you soon! 💌');
+            event.target.reset();
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = '0 10px 20px var(--shadow)';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('paymentModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('paymentModal')) {
+                closePaymentModal();
+            }
+        });
+    </script>
+</body>
+</html>
